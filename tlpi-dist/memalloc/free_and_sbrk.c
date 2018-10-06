@@ -19,6 +19,10 @@
    Try: free_and_sbrk 1000 10240 2 1 1000
         free_and_sbrk 1000 10240 1 1 999
         free_and_sbrk 1000 10240 1 500 1000
+    上面三种执行方式，使用valgrind 检测均存在内存泄露
+    例如使用 valgrind --leak-check=yes free_and_sbrk 1000 10240 2 会有如下提示：
+    512,000 bytes in 500 blocks
+    泄露512,000字节，该程序为了演示malloc 和 free之后program break对应的变化
 
         (Only the last of these should see the program break lowered.)
 */

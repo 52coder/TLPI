@@ -27,7 +27,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "tlpi_hdr.h"
+/*
+ENOENT
+The specified file does't exist,and O_CREAT was not specified,or O_CREATE was 
+specified,and one of the directories in pathname doesn't exist or is a symbolic
+link pointing to a nonexistent pathname(a dangling link)
+*/
 
+/*结合O_CREAT和O_EXECL标志一次性调用open()可以确保检查文件和创建文件的步骤属于一个原子操作*/
 int
 main(int argc, char *argv[])
 {
@@ -49,6 +56,8 @@ main(int argc, char *argv[])
                     (long) getpid(), argv[1]);
             if (argc > 2) {             /* Delay between check and create */
                 sleep(5);               /* Suspend execution for 5 seconds */
+                /*第三个命令行参数任意输入，此处只是通过argc进入sleep*/
+                /*./bad_exclusive_open tfile hello &然后再执行./bad_exclusive tfile*/
                 printf("[PID %ld] Done sleeping\n", (long) getpid());
             }
             fd = open(argv[1], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);

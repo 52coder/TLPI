@@ -25,8 +25,20 @@ void errMsg(const char *format, ...);
 
     /* This macro stops 'gcc -Wall' complaining that "control reaches
        end of non-void function" if we use the following functions to
-       terminate main() or some other non-void function. */
-
+	       terminate main() or some other non-void function. */
+	/* noreturn 
+	A few standard library functions, such as abort and exit, cannot return. 
+	GCC knows this automatically. Some programs define their own functions that 
+	never return. You can declare them noreturn to tell the compiler this fact. 
+	For example,
+          void fatal () __attribute__ ((noreturn));
+          
+          void
+          fatal ()
+          {
+            exit (1);
+          }
+	*/
 #define NORETURN __attribute__ ((__noreturn__))
 #else
 #define NORETURN

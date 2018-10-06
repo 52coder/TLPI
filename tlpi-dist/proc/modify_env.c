@@ -40,7 +40,11 @@ main(int argc, char *argv[])
             errExit("putenv: %s", argv[j]);
 
     /* Add a definition for GREET if one does not already exist */
-
+    /*The setenv function doesn't change the environment if the variable 
+    identified by name already exists and overwrite has the value 0.If 
+    overwrite is nonzero,the environment is always changed.
+    
+    */
     if (setenv("GREET", "Hello world", 0) == -1)
         errExit("setenv");
 

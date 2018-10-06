@@ -18,6 +18,10 @@
    unless you construct a suitably formatted input file, it can't be
    usefully executed.)
 */
+/*需要提供a suitably formatted input file，否则程序只能用来演示作用，无实际用处
+原子性是readv()的重要属性，假设有进程(线程)与其共享同一个文件偏移量，并且在调用readv的同时
+操作偏移量，readv所读取的数据仍将是连续的。
+*/
 #include <sys/stat.h>
 #include <sys/uio.h>
 #include <fcntl.h>

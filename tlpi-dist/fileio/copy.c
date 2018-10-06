@@ -13,11 +13,17 @@
 /* copy.c
 
    Copy the file named argv[1] to a new file named in argv[2].
+   Useage:
+       ./copy test test.old  //copy a regular file
+       ./copy a.txt /dev/tty //copy a regular file to this terminal
+       ./copy /dev/tty b.txt //copy input from this terminal to a regular file
+       ./copy /dev/pts/16 /dev/tty //copy input from another terminal
 */
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "tlpi_hdr.h"
 
+/*example use -DBUF_SIZE=512  then BUF_SIZE override to 512*/
 #ifndef BUF_SIZE        /* Allow "cc -D" to override definition */
 #define BUF_SIZE 1024
 #endif
