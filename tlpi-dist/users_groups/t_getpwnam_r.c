@@ -40,9 +40,11 @@ main(int argc, char *argv[])
         errExitEN(s, "getpwnam_r");
 
     if (result != NULL)
-        printf("Name: %s\n", pwd.pw_gecos);
+        printf("Name: %s; UID: %ld\n", pwd.pw_gecos, (long) pwd.pw_uid);
     else
         printf("Not found\n");
+
+
 
     exit(EXIT_SUCCESS);
 }

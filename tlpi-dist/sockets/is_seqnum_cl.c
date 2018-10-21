@@ -63,10 +63,11 @@ main(int argc, char *argv[])
         close(cfd);
     }
 
+    /*释放内存,在rp==NULL后释放存在内存泄露风险*/
+    freeaddrinfo(result);
+
     if (rp == NULL)
         fatal("Could not connect socket to any address");
-
-    freeaddrinfo(result);
 
     /* Send requested sequence length, with terminating newline */
 

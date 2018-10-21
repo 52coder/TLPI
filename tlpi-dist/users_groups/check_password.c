@@ -74,7 +74,7 @@ main(int argc, char *argv[])
     password = getpass("Password: ");
 
     /* Encrypt password and erase cleartext version immediately */
-
+    /*第二个参数必须使用pwd->pw_passwd*/
     encrypted = crypt(password, pwd->pw_passwd);
     for (p = password; *p != '\0'; )
         *p++ = '\0';

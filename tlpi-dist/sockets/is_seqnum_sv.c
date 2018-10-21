@@ -89,13 +89,14 @@ main(int argc, char *argv[])
         close(lfd);
     }
 
+    /*在listen后释放内存，存在内存泄露风险*/
+    freeaddrinfo(result);
+
     if (rp == NULL)
         fatal("Could not bind socket to any address");
 
     if (listen(lfd, BACKLOG) == -1)
         errExit("listen");
-
-    freeaddrinfo(result);
 
     for (;;) {                  /* Handle clients iteratively */
 

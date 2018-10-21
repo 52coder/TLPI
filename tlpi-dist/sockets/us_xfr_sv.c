@@ -16,6 +16,10 @@
    and copies data sent from clients to stdout.
 
    See also us_xfr_cl.c.
+   书中执行方式使用ls -lF /tmp/us_xfr  F的作用会在文件名后附上一个字符以说明该文件的类型，
+   “*”表示可执行的普通文件；“/”表示目录；“@”表示符号链接；“|”表示FIFOs；“=”表示套接字
+   服务端重定向标准输出 客户端执行重定向标准输入。服务端程序需要手动杀死，可以使用kill命令。
+   kill %1表示杀死jobs显示的后台任务的第一个任务，在item2中执行有所不同。
 */
 #include "us_xfr.h"
 #define BACKLOG 5
@@ -40,7 +44,8 @@ main(int argc, char *argv[])
 
     if (strlen(SV_SOCK_PATH) > sizeof(addr.sun_path) - 1)
         fatal("Server socket path too long: %s", SV_SOCK_PATH);
-
+    /*ENOENT means:No such directory entry,for this case ENOENT is exactly 
+    what we want.*/
     if (remove(SV_SOCK_PATH) == -1 && errno != ENOENT)
         errExit("remove-%s", SV_SOCK_PATH);
 
