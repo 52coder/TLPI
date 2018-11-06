@@ -64,6 +64,9 @@ main(int argc, char *argv[])
     }
 
     /*释放内存,在rp==NULL后释放存在内存泄露风险*/
+    /*exit终止进程后，进程所占用的资源(内存、文件描述符)归还系统，因此不会存在内存泄露
+    使用完立刻释放，形式上更简洁、统一.
+    */
     freeaddrinfo(result);
 
     if (rp == NULL)

@@ -75,6 +75,7 @@ main(int argc, char *argv[])
     /* Establish SIGCHLD handler to reap terminated child processes */
 
     sigemptyset(&sa.sa_mask);
+    /*自动重启由信号处理器程序终端的系统调用，支持部分系统调用*/
     sa.sa_flags = SA_RESTART;
     sa.sa_handler = grimReaper;
     if (sigaction(SIGCHLD, &sa, NULL) == -1) {
