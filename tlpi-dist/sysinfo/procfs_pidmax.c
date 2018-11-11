@@ -47,6 +47,11 @@ main(int argc, char *argv[])
 
     if (argc > 1)
         printf("Old value: ");
+    /*
+    printf("%.*s", (int) n, line)这种用法相对少见，n此处是控制字符串line的长度。
+    表示从字符串line中最多打印n个字符。此处n为line中字符串长度.
+    参考K&&R《C语言程序设计》
+    */
     printf("%.*s", (int) n, line);
 
     if (argc > 1) {

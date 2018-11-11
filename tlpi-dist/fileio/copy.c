@@ -23,7 +23,8 @@
 #include <fcntl.h>
 #include "tlpi_hdr.h"
 
-/*example use -DBUF_SIZE=512  then BUF_SIZE override to 512*/
+/*example use -DBUF_SIZE=512  then BUF_SIZE override to 512,use cc -Dmacro
+can override macro*/
 #ifndef BUF_SIZE        /* Allow "cc -D" to override definition */
 #define BUF_SIZE 1024
 #endif
