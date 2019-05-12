@@ -80,7 +80,7 @@ main(int argc, char *argv[])
     struct sigaction sa;
 
     /* Create server message queue */
-
+    /*IPC_CREAT和IPC_EXCL,当指定的key对应的队列已经存在，返回EEXIST错误*/
     serverId = msgget(SERVER_KEY, IPC_CREAT | IPC_EXCL |
                             S_IRUSR | S_IWUSR | S_IWGRP);
     if (serverId == -1)
@@ -89,6 +89,7 @@ main(int argc, char *argv[])
     /* Establish SIGCHLD handler to reap terminated children */
 
     sigemptyset(&sa.sa_mask);
+    /* http://man7.org/linux/man-pages/man7/signal.7.html */
     sa.sa_flags = SA_RESTART;
     sa.sa_handler = grimReaper;
     if (sigaction(SIGCHLD, &sa, NULL) == -1)

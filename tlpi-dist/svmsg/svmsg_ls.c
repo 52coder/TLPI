@@ -29,7 +29,7 @@ main(int argc, char *argv[])
     struct msginfo msginfo;
 
     /* Obtain size of kernel 'entries' array */
-
+    /* man 2  msgctl */
     maxind = msgctl(0, MSG_INFO, (struct msqid_ds *) &msginfo);
     if (maxind == -1)
         errExit("msgctl-MSG_INFO");

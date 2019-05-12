@@ -63,6 +63,7 @@ main(int argc, char *argv[])
             break;
 
         case 'k':               /* -k key (octal, decimal or hexadecimal) */
+            /*sscanf这里可以处理八进制(例025),十进制(例25) 十六进制(0x25)*/
             if (sscanf(optarg, "%li", &lkey) != 1)
                 cmdLineErr("-k option requires a numeric argument\n");
             key = lkey;

@@ -56,7 +56,7 @@ main(int argc, char *argv[])
         else
             usageError(argv[0], NULL);
     }
-
+    /*argc最小==optind +2,最大== optind + 3*/
     if (argc < optind + 2 || argc > optind + 3)
         usageError(argv[0], "Wrong number of arguments\n");
 

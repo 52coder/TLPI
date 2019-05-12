@@ -35,6 +35,15 @@ struct requestMsg {                     /* Requests (client to server) */
 /* REQ_MSG_SIZE computes size of 'mtext' part of 'requestMsg' structure.
    We use offsetof() to handle the possibility that there are padding
    bytes between the 'clientId' and 'pathname' fields. */
+/*
+通常消息结构如下：
+struct mbuf {
+    long mtype;    //Message type
+    char mtext[MAX_MTEXT]; //Message body
+}
+上面宏REQ_MSG_SIZE就是把clientId和pathname当成mtext计算消息大小，例如PATH_MAX为4096
+,那么使用宏REQ_MSG_SIZE计算得4100。
+*/
 
 #define REQ_MSG_SIZE (offsetof(struct requestMsg, pathname) - \
                       offsetof(struct requestMsg, clientId) + PATH_MAX)
